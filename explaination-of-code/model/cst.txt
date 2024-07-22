@@ -1,0 +1,4 @@
+The Einops library is a Python library designed to make it easier to work with tensors (multidimensional arrays) by providing a concise and expressive syntax for reshaping, permuting, and manipulating tensor dimensions. It is particularly useful for deep learning tasks, where manipulation of tensor shapes is common.
+
+Einops provides a set of functions that allow you to perform operations like reshaping, transposing, and permuting tensor dimensions using a simple and intuitive syntax. It also supports operations like stacking, splitting, and reducing dimensions.
+

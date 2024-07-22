@@ -1,0 +1,29 @@
+2024-04-27 00:25:21,296 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Configure stats pid to 26404
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Loading settings from C:\Users\ashis\.config\wandb\settings
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Loading settings from C:\cst-main\wandb\settings
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'C:\\cst-main\\main.py', 'program': 'C:\\cst-main\\main.py'}
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_setup.py:_flush():76] Applying login settings: {'mode': 'offline'}
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_init.py:_log_setup():521] Logging user logs to C:\cst-main\wandb\offline-run-20240427_002521-ky19z2hi\logs\debug.log
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_init.py:_log_setup():522] Logging internal logs to C:\cst-main\wandb\offline-run-20240427_002521-ky19z2hi\logs\debug-internal.log
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_init.py:init():561] calling init triggers
+2024-04-27 00:25:21,297 INFO    MainThread:26404 [wandb_init.py:init():568] wandb.init called with sweep_config: {}
+config: {}
+2024-04-27 00:25:21,298 INFO    MainThread:26404 [wandb_init.py:init():611] starting backend
+2024-04-27 00:25:21,298 INFO    MainThread:26404 [wandb_init.py:init():615] setting up manager
+2024-04-27 00:25:21,306 INFO    MainThread:26404 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-04-27 00:25:21,315 INFO    MainThread:26404 [wandb_init.py:init():623] backend started and connected
+2024-04-27 00:25:21,320 INFO    MainThread:26404 [wandb_init.py:init():715] updated telemetry
+2024-04-27 00:25:21,322 INFO    MainThread:26404 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-04-27 00:25:21,329 INFO    MainThread:26404 [wandb_init.py:init():799] starting run threads in backend
+2024-04-27 00:25:24,879 INFO    MainThread:26404 [wandb_run.py:_console_start():2335] atexit reg
+2024-04-27 00:25:24,880 INFO    MainThread:26404 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-04-27 00:25:24,880 INFO    MainThread:26404 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-04-27 00:25:24,880 INFO    MainThread:26404 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-04-27 00:25:24,881 INFO    MainThread:26404 [wandb_init.py:init():842] run started, returning control to user process
+2024-04-27 00:25:26,078 INFO    MainThread:26404 [wandb_run.py:_config_callback():1347] config_cb None None {'datapath': 'datasets', 'backbone': 'vit-small', 'benchmark': 'pascal', 'logpath': 'savecheck', 'way': 1, 'shot': 1, 'batchsize': 12, 'lr': 0.001, 'maxepochs': 2000, 'fold': 0, 'nowandb': False, 'eval': False, 'sup': 'mask', 'resume': False, 'vis': False, 'imgsize': 400}
+2024-04-27 00:25:26,703 INFO    MainThread:26404 [wandb_watch.py:watch():51] Watching
+2024-04-27 00:25:29,135 WARNING MsgRouterThr:26404 [router.py:message_loop():77] message_loop has been closed

@@ -1,0 +1,15 @@
+The CustomProgressBar class is a custom implementation of the TQDMProgressBar class from the pytorch_lightning.callbacks.progress module. 
+It provides a progress bar and prints information at the end of each epoch during training and validation.
+
+Main functionalities
+Displays a progress bar during training and validation epochs.
+Prints information such as loss, miou, and er at the end of each epoch.
+Updates the experiment configuration in the logger if using WandbLogger.
+Prints the model architecture and parameter count.
+Watches the model for logging if using WandbLogger.
+Methods
+on_fit_start(trainer, pl_module): Called at the start of training. Updates the experiment configuration in the logger if using WandbLogger. Prints the model architecture and parameter count. Watches the model for logging if using WandbLogger.
+on_train_epoch_end(trainer, pl_module): Called at the end of each training and validation epoch. Prints the loss, miou, and er for both training and validation splits.
+on_test_start(trainer, pl_module): Called at the start of testing. Prints the model architecture and parameter count.
+Fields
+args: Stores the command-line arguments passed to the program.

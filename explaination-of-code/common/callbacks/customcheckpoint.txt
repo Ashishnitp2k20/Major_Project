@@ -1,0 +1,17 @@
+The CustomCheckpoint class is a subclass of ModelCheckpoint that provides custom functionality for loading and saving checkpoints during training and evaluation.
+
+Main functionalities
+Customizes the directory path for saving checkpoints based on the provided arguments.
+Sets the filename for the checkpoint based on the provided arguments.
+Determines the monitor metric for selecting the best model checkpoint.
+Overrides the return_best_model_path method to return the path of the best model checkpoint for evaluation.
+Methods
+__init__(self, args): Initializes the CustomCheckpoint object by setting the directory path, filename, monitor metric, and other parameters for saving checkpoints.
+return_best_model_path(self, dirpath, filename): Returns the path of the best model checkpoint for evaluation by sorting the checkpoint files in the directory and selecting the appropriate file.
+Fields
+dirpath: The directory path for saving the checkpoints.
+filename: The filename for the checkpoint.
+way: The number of classes for the classification task.
+monitor: The metric used for selecting the best model checkpoint.
+modelpath: The path of the model checkpoint file.
+lastmodelpath: The path of the last model checkpoint file

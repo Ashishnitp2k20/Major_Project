@@ -1,0 +1,194 @@
+from line 16:
+It initializes the pascal attributes like #classes, #folds, file paths, etc.
+also it mention particular class name.
+from line 37 & 38
+it sets two path one for image and one for its sagementation mask.
+from line 42 to 45:
+The build_class_ids() method is called to initialize the self.class_ids variable. This method determines the class IDs based on the split and fold values.
+The build_img_metadata() method is called to initialize the self.img_metadata variable. This method reads the metadata for the split and fold from a file and stores it in a list.
+The build_img_metadata_classwise() method is called to initialize the self.img_metadata_classwise variable. This method organizes the image metadata by class ID.
+len method:
+__len__ that returns the length of the img_metadata list if the split attribute is equal to 'trn', otherwise it returns 1000.
+line 49 to 94:
+__getitem__ within the DatasetPASCAL class. It retrieves a specific item from the dataset based on the given index. It performs various operations such as loading images, applying transformations, generating masks, and organizing the data into a batch.
+
+Inputs
+idx: The index of the item to retrieve from the dataset.
+Flow
+The method calls the sample_episode method to get the query name, support names, and support classes for the given index.
+It then calls the load_frame method to load the query image, query mask, support images, support masks, and original query image size.
+It checks if any augmentation transforms are provided. If so, it applies each transform to the query image and stores the augmented images.
+The query image is transformed using the provided transform.
+The get_query_mask method is called to generate the query mask and query ignore index based on the query image and query class mask.
+The support images are transformed using the provided transform and stacked together.
+The get_support_masks method is called to generate the support masks and support ignore indexes based on the support images, support classes, and support class masks.
+The support classes and query class presence are converted to tensors.
+An assertion is made to ensure that the sum of the query class presence is equal to the number of unique labels in the query mask minus one.
+The data is organized into a dictionary called batch with various keys representing different data components.
+
+from 97 to 102:
+It resizes the query segmentation mask during training and retains the original size during validation. It then calls the generate_query_episodic_mask method to generate the query mask and the corresponding ignore index.
+
+Inputs
+query_img: The query image.
+query_cmask: The query segmentation mask.
+rename_class: A function that renames the class labels.
+Flow
+If the split is 'trn' (training), the query segmentation mask is resized to match the size of the query image using bilinear interpolation.
+The resized query segmentation mask is then passed to the generate_query_episodic_mask method along with the rename_class function.
+The generate_query_episodic_mask method generates the query mask by renaming the class labels in the segmentation mask according to the rename_class function.
+The method also returns the ignore index, which represents the boundary between different classes in the query mask.
+Outputs
+query_mask: The generated query mask with renamed class labels.
+query_ignore_idx: The ignore index representing the boundary between different classes in the query mask.
+from 103 to 120:
+get_support_masks that takes in support images, support classes, support masks, and a function to rename classes. It iterates over each support class and support mask, resizes the mask to match the size of the support images, generates a support episodic mask using the renamed class, and appends the support mask and ignore index to their respective lists. Finally, it returns the stacked support masks and ignore indexes.
+
+Inputs
+support_imgs: A tensor containing the support images.
+_support_classes: A tensor containing the support classes.
+support_cmasks: A tensor containing the support masks.
+rename_class: A function that renames the class IDs.
+Flow
+Iterate over each support class and support mask.
+Resize the support mask to match the size of the support images.
+Generate a support episodic mask using the renamed class.
+Append the support mask and ignore index to their respective lists.
+Stack the support masks and ignore indexes.
+Return the stacked support masks and ignore indexes.
+Outputs
+support_masks: A tensor containing the stacked support masks.
+support_ignore_idxs: A tensor containing the stacked support ignore indexes.
+from 121 to 13o:
+generate_query_episodic_mask and generate_support_episodic_mask, which are used to generate episodic masks for the query and support images, respectively.
+
+Inputs
+mask: The input mask image.
+rename_class: A function that renames the class labels in the mask.
+Flow
+The generate_query_episodic_mask function takes an input mask image and a function to rename class labels.
+It creates a new mask tensor with the same shape as the input mask.
+It calculates the boundary of the mask by dividing the mask values by 255 and flooring the result.
+It iterates over the unique class labels in the mask.
+For each class label, it assigns a new value to the corresponding pixels in the renamed mask tensor. If the class label is 0 or 255, the value is set to 0; otherwise, the value is obtained by applying the rename_class function to the class label.
+It returns the renamed mask tensor and the boundary tensor.
+Outputs
+mask_renamed: The renamed mask tensor.
+boundary: The boundary tensor.
+from 132 to 139:
+The code snippet is a method called generate_support_episodic_mask that takes a mask, a class ID, and a function rename_class as inputs. It generates a support episodic mask by modifying the input mask based on the class ID and the rename_class function.
+
+Inputs
+mask: The input mask that represents the segmentation mask.
+class_id: The class ID that specifies the class to be extracted from the mask.
+rename_class: A function that renames the class ID to a different value.
+Flow
+The method clones the input mask to avoid modifying the original mask.
+It calculates the boundary by dividing the mask values by 255 and flooring the result.
+It sets all the mask values that are not equal to the class ID to 0.
+It sets all the mask values that are equal to the class ID to the renamed value obtained from the rename_class function.
+It returns the modified mask and the boundary.
+Outputs
+Modified mask: The mask with all the values not equal to the class ID set to 0 and all the values equal to the class ID replaced with the renamed value.
+Boundary: The boundary values calculated from the mask.
+from 140 t0 149:
+The code snippet is a method called load_frame that loads the query image, query mask, support images, and support masks for a given query name and a list of support names. It also returns the original query image size.
+
+Inputs
+query_name: A string representing the name of the query image.
+support_names: A list of strings representing the names of the support images.
+Flow
+The method calls the read_img method to read the query image and assigns it to the variable query_img.
+The method calls the read_mask method to read the query mask and assigns it to the variable query_mask.
+The method uses a nested list comprehension to read each support image in support_names using the read_img method and assigns them to the variable support_imgs.
+The method uses a nested list comprehension to read each support mask in support_names using the read_mask method and assigns them to the variable support_masks.
+The method assigns the size of the query image to the variable org_qry_imsize.
+The method returns the query image, query mask, support images, support masks, and original query image size.
+from 150 to 158:
+The code snippet consists of two functions, read_mask and read_img, which are methods of the DatasetPASCAL class. The read_mask function reads a segmentation mask image file and converts it into a tensor, while the read_img function reads an RGB image file and returns it as a PIL Image object.
+
+Inputs
+img_name: A string representing the name of the image file to be read.
+Flow
+In the read_mask function, the image file path is constructed by joining the ann_path attribute of the DatasetPASCAL class with the img_name parameter, and the file extension ".png" is appended.
+The Image.open function is used to open the image file as a PIL Image object.
+The PIL Image object is converted into a numpy array using the np.array function.
+The numpy array is then converted into a PyTorch tensor using the torch.tensor function.
+The resulting tensor is returned as the segmentation mask.
+Outputs
+For the read_mask function, the output is a PyTorch tensor representing the segmentation mask.
+For the read_img function, the output is a PIL Image object representing the RGB image.
+from 159 to 185:
+The code snippet is a method called sample_episode that is part of the DatasetPASCAL class. It samples a query image and its corresponding support images for a few-shot learning episode.
+
+Inputs
+idx: An integer representing the index of the episode.
+Flow
+If the split is 'val', the random seed is set using the index for reproducibility.
+The index is modulo divided by the length of img_metadata to ensure it is within the range of available images.
+The query name and query class are retrieved from img_metadata.
+The support names list is initialized.
+The probability distribution p is created, where each class has an equal probability except for the query class, which has a probability of 0.5.
+The support classes are randomly chosen from class_ids based on the probability distribution p.
+For each support class, a list of support names is created.
+While the length of the support names list is less than the desired number of shots:
+A support name is randomly chosen from img_metadata_classwise for the corresponding support class.
+If the support name is not equal to the query name and is not already in the support names list, it is added to the list.
+The query name, support names, and support classes are returned.
+Outputs
+query_name: A string representing the name of the query image.
+support_names: A list of lists, where each inner list contains the names of the support images for each support class.
+support_classes: A list of integers representing the support classes.
+
+The code snippet defines a method called build_class_ids which is a part of the DatasetPASCAL class. This method is responsible for generating a list of class IDs based on the current fold and split of the dataset.
+
+Inputs
+The method does not take any explicit inputs. However, it relies on the following instance variables of the DatasetPASCAL class:
+
+self.nclass: the total number of classes in the dataset
+self.nfolds: the number of folds in the dataset
+self.fold: the current fold of the dataset
+self.split: the current split of the dataset (either 'trn' or 'val')
+Flow
+The method calculates the number of classes in each fold (nclass_val) by dividing the total number of classes by the number of folds.
+It generates a list of class IDs for the validation set (class_ids_val) by multiplying the current fold with nclass_val and adding the range from 1 to nclass_val.
+It generates a list of class IDs for the training set (class_ids_trn) by iterating over the range from 1 to self.nclass and excluding the class IDs present in class_ids_val.
+The method asserts that the combined set of class IDs for the training and validation sets is equal to the total number of classes and that the class ID 0 is not present in either set.
+If the current split is 'trn', the method returns class_ids_trn. Otherwise, it returns class_ids_val.
+Outputs
+The method returns a list of class IDs based on the current fold and split of the dataset.
+from 202 t0 225:
+The code snippet is a method called build_img_metadata that is part of the DatasetPASCAL class. It reads image metadata from a file based on the split and fold ID. The metadata includes the image name and its corresponding class label. The method returns a list of image metadata.
+
+Inputs
+The method takes no explicit inputs, but it relies on the following instance variables of the DatasetPASCAL class:
+
+self.split: a string indicating the split ('trn' for training or 'val' for validation)
+self.fold: an integer indicating the fold ID
+Flow
+The method defines a nested function called read_metadata that reads image metadata from a file based on the split and fold ID. The metadata is stored as a list of lists, where each inner list contains the image name and its class label.
+The method initializes an empty list called img_metadata.
+If the split is 'trn', the method iterates over the folds and reads the image metadata for each fold, excluding the validation fold. The metadata is appended to the img_metadata list.
+If the split is 'val', the method reads the image metadata for the current fold and assigns it to the img_metadata list.
+If the split is neither 'trn' nor 'val', an exception is raised.
+The method prints the total number of images in the split.
+The method returns the img_metadata list.
+Outputs
+The method returns a list of image metadata, where each element is a list containing the image name and its class label.
+from 226 to 239:
+The code snippet is a method called build_img_metadata_classwise that builds a dictionary img_metadata_classwise which contains the image metadata grouped by class.
+
+Inputs
+The method does not take any inputs.
+
+Flow
+Initialize an empty dictionary img_metadata_classwise.
+Iterate over each class ID from 1 to self.nclass + 1.
+For each class ID, initialize an empty list as the value in the img_metadata_classwise dictionary.
+Iterate over each image in the img_metadata list.
+Append the image name to the list corresponding to its class ID in the img_metadata_classwise dictionary.
+Assert that the keys of the img_metadata_classwise dictionary do not contain 0 and contain self.nclass.
+Outputs
+The method returns the img_metadata_classwise dictionary.
+
+

@@ -1,0 +1,6 @@
+PyTorch Lightning is a lightweight PyTorch wrapper that simplifies the training of neural networks by providing a high-level interface and abstractions. It allows researchers and practitioners to focus more on the research aspects of deep learning rather than boilerplate code for training loops, logging, and other routine tasks.
+
+torch.nn.functional also includes functions for performing convolution and pooling operations commonly used in convolutional neural networks (CNNs). These operations are fundamental for extracting features from input data, especially in tasks like image recognition.
+
+torch.nn.functional includes various utility functions for tensor manipulation, such as concatenation, reshaping, padding, and element-wise operations like addition and multiplication.
+

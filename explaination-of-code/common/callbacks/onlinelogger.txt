@@ -1,0 +1,22 @@
+The OnlineLogger class is a custom logger class that extends the WandbLogger class from the pytorch_lightning.loggers module. It is used to log experiment information to the Weights & Biases platform.
+
+Main functionalities
+Customizing the experiment log path by using the args.logpath value as the name of the logger.
+Setting the project name based on the values of args.benchmark, args.backbone, and args.sup.
+Grouping the experiments based on the value of args.fold.
+Disabling the logging of the model by setting log_model to False.
+Methods
+The OnlineLogger class does not define any additional methods. It inherits all the methods from the WandbLogger class.
+
+Fields
+args: The arguments passed to the OnlineLogger class constructor.
+Usage example
+args = {
+    'logpath': 'experiment_logs',
+    'benchmark': 'benchmark1',
+    'backbone': 'resnet50',
+    'sup': 'supervised',
+    'fold': 1
+}
+
+logger = OnlineLogger(args)

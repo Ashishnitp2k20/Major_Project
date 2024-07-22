@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.22631-SP0",
+    "python": "3.10.14",
+    "heartbeatAt": "2024-04-27T10:15:12.280480",
+    "startedAt": "2024-04-27T10:15:12.182453",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--datapath",
+        "datasets",
+        "--benchmark",
+        "pascal",
+        "--logpath",
+        "savecheck",
+        "--fold",
+        "0",
+        "--sup",
+        "mask"
+    ],
+    "state": "running",
+    "program": "C:\\cst-main\\main.py",
+    "codePathLocal": "main.py",
+    "codePath": "main.py",
+    "host": "Ashish",
+    "username": "ashis",
+    "executable": "C:\\Users\\ashis\\anaconda3\\envs\\cst\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3001.0,
+        "min": 0.0,
+        "max": 3001.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3001.0,
+            "min": 0.0,
+            "max": 3001.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 453.6917152404785,
+            "used": 354.4570083618164
+        }
+    },
+    "memory": {
+        "total": 7.419620513916016
+    }
+}

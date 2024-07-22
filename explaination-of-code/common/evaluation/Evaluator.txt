@@ -1,0 +1,43 @@
+The Evaluator class provides methods for evaluating predictions in classification and segmentation tasks.
+
+Main functionalities
+The main functionalities of the Evaluator class are:
+
+Classification evaluation: The cls_prediction method takes a tensor of class scores and ground truth labels, and returns a tensor indicating whether the predictions are correct or not.
+Segmentation evaluation: The seg_prediction method takes a tensor of predicted masks and a batch dictionary containing the ground truth masks and ignore indices. It computes the intersection and union between the predicted masks and ground truth masks for each episode in the batch.
+Methods
+cls_prediction(cls_score, gt): Computes the correctness of classification predictions based on class scores and ground truth labels.
+seg_prediction(pred_mask, batch, ignore_index=255): Computes the intersection and union between predicted masks and ground truth masks for segmentation evaluation.
+Fields
+The Evaluator class does not have any fields.
+
+a. The cls_prediction method in the Evaluator class is used to predict the correctness of a binary classification based on a given threshold. It compares the predicted scores with the ground truth labels and returns a boolean tensor indicating whether the predictions are correct or not.
+
+Inputs
+cls_score: A tensor containing the predicted scores for each sample.
+gt: A tensor containing the ground truth labels for each sample.
+Flow
+The method compares the predicted scores (cls_score) with a threshold of 0.5 to obtain the predicted class labels (cls_pred).
+It then compares the predicted class labels with the ground truth labels (gt) to determine if the predictions are correct or not.
+The method returns a boolean tensor (pred_correct) indicating whether the predictions are correct or not.
+Outputs
+pred_correct: A boolean tensor indicating whether the predictions are correct or not for each sample.
+
+b. The seg_prediction method in the Evaluator class computes the intersection and union between the predicted mask and the ground-truth mask for each episode in a batch. It also applies an ignore index to the ground-truth mask if specified.
+
+Inputs
+pred_mask: The predicted mask for each episode in the batch.
+batch: A dictionary containing the ground-truth mask (query_mask) and the ignore index (query_ignore_idx).
+Flow
+Get the ground-truth mask from the batch.
+If an ignore index is specified and exists in the batch, apply it to the ground-truth mask and update the predicted mask accordingly.
+Iterate over each predicted mask and ground-truth mask in the batch.
+Compute the intersection between the predicted mask and the ground-truth mask.
+If the intersection is empty, set the intersection area to [0, 0].
+Compute the histogram of the intersection, predicted mask, and ground-truth mask using two bins (0 and 1).
+Append the intersection, predicted area, and ground-truth area to their respective lists.
+Stack the intersection, predicted area, and ground-truth area tensors.
+Compute the union by adding the predicted area and ground-truth area and subtracting the intersection.
+Outputs
+area_inter: The intersection area between the predicted mask and the ground-truth mask for each episode in the batch.
+area_union: The union area between the predicted mask and the ground-truth mask for each episode in the batch.
